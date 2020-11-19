@@ -1,0 +1,23 @@
+
+
+.question__link {
+    display: block;
+    padding: 10px;
+
+    text-align: center;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.question__link:hover {
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.no_question {
+    display: block;
+    padding: 10px;
+
+    text-align: center;
+    font-size: 18px;
+    color: #000000;
+}
