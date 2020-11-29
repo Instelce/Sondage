@@ -1,40 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Question - Sondage</title>
+{% extends "polls/base.html" %}
+{% load static %}
 
-    <!-- Font LINK -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;200;300;400;500&display=swap" rel="stylesheet">
-
-    <!-- CSS LINK -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'polls/css/main.css' %}">
-    <link rel="stylesheet" href="{% static 'polls/css/style-index.css' %}">
-</head>
-<body>
-    <div class="container">
-        <div class="polls__box">
-            <h1 class="title">Sondage</h1>
-            {% if latest_question_list %}
-            <ul>
+{% block content %}
+    <div class="sondage__container">
+        <h3 class="main__title">Questions</h3>
+        {% if latest_question_list %}
             {% for question in latest_question_list %}
-                <li><a class="question__link" href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+                <div href="#" class="sondage__link">
+                    <div class="sondage__left">
+                        <img class="sondage__user" src="{% static 'polls/images/user-image.jpg' %}">
+                        <div>
+                            <h3 class="sondage__title"><a href="{% url 'polls:results' question.id %}">{{ question.question_text }}</a></h3>
+                            <p class="sondage__date">{{ question.pub_date|date:"d F, Y" }}</p>
+                        </div>
+                    </div>
+                    <div class="sondage__button-container">
+                        <a href="#" class="btn button__red">Suprimer</a>
+                        <a href="#" class="btn button__blue">Mettre à jour</a>
+                        <a href="{% url 'polls:detail' question.id %}" class="btn button__gray">Voter</a>
+                    </div>
+                </div>
             {% endfor %}
-            </ul>
-            {% else %}
-        <p class="no_question">Aucune question n'a été créé.</p>
-            {% endif %}
-        </div>
-        <footer class="footer">
-            <p>S'inspire du projet <a href="https://docs.djangoproject.com/fr/3.1/intro/tutorial01/">officiel de Django</a></p>
-            <p>&copy; Instelce 2020</p>
-        </footer>
+        {% else %}
+            <p>Aucune question n'a été créé.</p>
+        {% endif %}
     </div>
-</body>
-</html>
 
+    <div class="sidebar">
+        <div class="filter__container">
+            <h3 class="main__title">Filtre</h3>
+            <a href="#" class="filter__button"><img src="{% static 'polls/images/encoche-icon.svg' %}"> Aujourd'hui</a>
+            <a href="#" class="filter__button"><img src="{% static 'polls/images/encoche-icon.svg' %}"> Cette semaine</a>
+            <a href="#" class="filter__button"><img src="{% static 'polls/images/encoche-icon.svg' %}"> Ce mois</a>
+            <a href="#" class="filter__button"><img src="{% static 'polls/images/encoche-icon.svg' %}"> Cette année</a>
+        </div>
+        <div class="user__container-button">
+            <a class="btn button__gray" href="#"><img class="button__img" src="{% static 'polls/images/eyes-icon.svg' %}">Profile</a>
+            <a class="btn button__red" href="#"><img class="button__img" src="{% static 'polls/images/plus-icon.svg' %}">Nouvelle Question</a>
+        </div>
+    </div>
+{% endblock content %}

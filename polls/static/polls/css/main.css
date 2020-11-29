@@ -18,15 +18,22 @@ body {
     padding: 0px 20%;
 }
 
+.small__container {
+    padding-left: 20px;
+}
+
 .btn {
     padding: 10px 20px;
 
     text-transform: uppercase;
     border-radius: 5px;
+    border: none;
+    outline: none;
     color: #ffffff;
     font-weight: 100;
     text-align: center;
     opacity: 1;
+    cursor: pointer;
 
     display: inline-flex;
     justify-content: center;
@@ -61,6 +68,31 @@ body {
     background: rgba(73, 192, 252, 0.8);
 }
 
+.link__red {
+    color: var(--color-primary-red);
+}
+
+.link__red:hover {
+    color: hsl(0, 71%, 57%);
+}
+
+.mt-1 {
+    margin-top: 10px;
+}
+
+.mb-1 {
+    margin-bottom: 10px;
+}
+
+.mr-1 {
+    margin-right: 10px;
+}
+
+.ml-1 {
+    margin-left: 10px;
+}
+
+/* Media Querry */
 @media only screen and (max-width: 1700px) {
     .container {
         padding: 0px 15%;
@@ -84,6 +116,7 @@ body {
         padding: 0px 40px 0px 40px;
     }
 }
+
 
 /* ----- Topbar Style ----- */
 
@@ -487,8 +520,4 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
-
-.footer a {
-    color: var(--color-primary-red);
 }

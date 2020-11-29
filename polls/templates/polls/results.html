@@ -1,39 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vote - Sondage</title>
+{% extends "polls/base.html" %}
+{% load static %}
 
-    <!-- Font LINK -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+{% block content %}
+<div class="sondage__container">
+    <h3 class="main__title">{{ question.question_text }}</h3>
 
-    <!-- CSS LINK -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'polls/css/main.css' %}">
-    <link rel="stylesheet" href="{% static 'polls/css/style-result.css' %}">
-</head>
-<body>
-    <div class="container">
-        <div class="polls__box">
-            <h1 class="title">{{ question.question_text }}</h1>
-
-            <ul class="vote__container">
+        <ul class="small__container">
             {% for choice in question.choice_set.all %}
                 <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
             {% endfor %}
-            </ul>
+        </ul>
 
-            <a class="button" href="{% url 'polls:detail' question.id %}">Voter encore ?</a>
-            <a class="button" href="{% url 'polls:index' %}">Retour au question</a>
-        </div>
-        <footer class="footer">
-            <p>S'inspire du projet <a href="https://docs.djangoproject.com/fr/3.1/intro/tutorial01/">officiel de Django</a></p>
-            <p>&copy; Instelce 2020</p>
-        </footer>
+        <a class="btn button__gray" href="{% url 'polls:home' %}">Retour au question</a>
     </div>
-</body>
-</html>
+</div>
+{% endblock content %}

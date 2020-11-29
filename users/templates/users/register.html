@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "polls/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="sondage__container">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="">
+                <legend class="">Inscription</legend>
+                {{ form }}
+            </fieldset>
+            <div class="">
+                <button class="btn button__blue" type="submit">S'inscrire</button>
+            </div>
+        </form>
+        <div class="">
+            <small class="">Déja un compte ? <a href="link__red">Se connecter</a></small>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,45 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détail - Sondage</title>
+{% extends "polls/base.html" %}
+{% load static %}
 
-    <!-- Font LINK -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+{% block content %}
+<div class="sondage__container">
+    <h3 class="main__title">{{ question.question_text }}</h3>
 
-    <!-- CSS LINK -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'polls/css/main.css' %}">
-    <link rel="stylesheet" href="{% static 'polls/css/style-detail.css' %}">
-</head>
-<body>
-    <div class="container">
-        <div class="polls__box">
-            <h1 class="title">{{ question.question_text }}</h1>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-        
-            <form class="polls__form" action="{% url 'polls:vote' question.id %}" method="post">
-                {% csrf_token %}
-                <div class="choice__container">
-                {% for choice in question.choice_set.all %}
-                    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-                    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
-                {% endfor %}
-                </div>
-                
-                <input class="button" type="submit" value="Vote">
-            </form>
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+        {% csrf_token %}
+        <div class="small__container">
+        {% for choice in question.choice_set.all %}
+            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+        {% endfor %}
         </div>
-        <footer class="footer">
-            <p>S'inspire du projet <a href="https://docs.djangoproject.com/fr/3.1/intro/tutorial01/">officiel de Django</a></p>
-            <p>&copy; Instelce 2020</p>
-        </footer>
-    </div>
-    
-</body>
-</html>
+
+        <input class="btn button__blue mt-1" type="submit" value="Vote">
+    </form>
+</div>
+{% endblock content %}
