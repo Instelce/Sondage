@@ -5,13 +5,15 @@
 <div class="sondage__container">
     <h3 class="main__title">{{ question.question_text }}</h3>
 
-        <ul class="small__container">
+        <div>
             {% for choice in question.choice_set.all %}
-                <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+                <div>
+                    {{ choice.choice_text }} <div>{{ choice.votes }} vote{{ choice.votes|pluralize }}</div>
+                </div>
             {% endfor %}
-        </ul>
+        </div>
 
-        <a class="btn button__gray" href="{% url 'polls:home' %}">Retour au question</a>
+        <a class="btn button__gray mt-2" href="{% url 'polls:home' %}">Retour au question</a>
     </div>
 </div>
 {% endblock content %}

@@ -8,16 +8,20 @@
             {% for question in latest_question_list %}
                 <div href="#" class="sondage__link">
                     <div class="sondage__left">
-                        <img class="sondage__user" src="{% static 'polls/images/user-image.jpg' %}">
+                        <img class="sondage__user" src="{{ question.author.profile.image.url }}">
                         <div>
                             <h3 class="sondage__title"><a href="{% url 'polls:results' question.id %}">{{ question.question_text }}</a></h3>
-                            <p class="sondage__date">{{ question.pub_date|date:"d F, Y" }}</p>
+                            <p class="sondage__date">{{ question.pub_date|date:"d F, Y" }} - {{ question.author }}</p>
                         </div>
                     </div>
                     <div class="sondage__button-container">
-                        <a href="#" class="btn button__red">Suprimer</a>
-                        <a href="#" class="btn button__blue">Mettre à jour</a>
-                        <a href="{% url 'polls:detail' question.id %}" class="btn button__gray">Voter</a>
+                        {% if user.is_authenticated %}
+                            <a href="#" class="btn button__red">Supprimer</a>
+                            <a href="#" class="btn button__blue">Mettre à jour</a>
+                            <a href="{% url 'polls:detail' question.id %}" class="btn button__gray">Voter</a>
+                        {% else %}
+                            <a href="{% url 'polls:detail' question.id %}" class="btn button__gray">Voter</a>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
@@ -34,9 +38,11 @@
             <a href="#" class="filter__button"><img src="{% static 'polls/images/encoche-icon.svg' %}"> Ce mois</a>
             <a href="#" class="filter__button"><img src="{% static 'polls/images/encoche-icon.svg' %}"> Cette année</a>
         </div>
-        <div class="user__container-button">
-            <a class="btn button__gray" href="#"><img class="button__img" src="{% static 'polls/images/eyes-icon.svg' %}">Profile</a>
-            <a class="btn button__red" href="#"><img class="button__img" src="{% static 'polls/images/plus-icon.svg' %}">Nouvelle Question</a>
-        </div>
+        {% if user.is_authenticated %}
+            <div class="user__container-button">
+                <a class="btn button__gray" href="{% url 'profile' %}"><img class="button__img" src="{% static 'polls/images/eyes-icon.svg' %}">Profile</a>
+                <a class="btn button__red" href="{% url 'polls:create' %}"><img class="button__img" src="{% static 'polls/images/plus-icon.svg' %}">Nouvelle Question</a>
+            </div>
+        {% endif %}
     </div>
 {% endblock content %}

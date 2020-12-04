@@ -4,11 +4,13 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from .models import Choice, Question
 
 
 class IndexView(generic.ListView):
+    model = Question
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
 
@@ -23,6 +25,7 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
+    extra_context = {'title': 'Voter'}
 
     def get_queryset(self):
         """
@@ -31,9 +34,35 @@ class DetailView(generic.DetailView):
         return Question.objects.filter(pub_date__lte=timezone.now())
 
 
+class QuestionCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Question
+    fields = ['question_text', 'pub_date']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        #form.instance.choice_text = self.request.question_id
+        return super().form_valid(form)
+
+
+class QuestionUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+    model = Question
+    fields = ['question_text', 'pub_date']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        question = self.get_object()
+        if self.request.user == question.author:
+            return True
+        return False
+
+
 class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
+    extra_context = {'title': 'Detail'}
 
 
 def vote(request, question_id):
@@ -42,7 +71,7 @@ def vote(request, question_id):
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form
-        context = {'question': question, 'error_message': "You didn't select a choice."}
+        context = {'question': question, 'error_message': "Tu n'as rien choisit !"}
         return render(request, 'polls/detail.html', context)
     else:
         selected_choice.votes += 1

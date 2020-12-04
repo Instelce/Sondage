@@ -7,15 +7,12 @@
         <form class="form__register" method="POST">
             {% csrf_token %}
             <fieldset class="form__group">
-                <legend class="main__title">Inscription</legend>
+                <legend class="main__title">Ajout d'une question</legend>
                 {{ form|crispy }}
             </fieldset>
             <div class="mt-2">
-                <button class="btn button__gray" type="submit">S'inscrire</button>
+                <button class="btn button__gray" type="submit">Soumettre</button>
             </div>
         </form>
-        <div class="mt-1">
-            <small class="text__gray">Déja un compte ? <a href="{% url 'login' %}" class="link__red">Se connecter</a></small>
-        </div>
     </div>
 {% endblock content %}
