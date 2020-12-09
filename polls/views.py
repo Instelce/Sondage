@@ -40,7 +40,15 @@ class QuestionCreateView(LoginRequiredMixin, generic.CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        #form.instance.choice_text = self.request.question_id
+        return super().form_valid(form)
+
+
+class ChoiceCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Choice
+    fields = ['choice_text', 'question']
+    success_url = '/'
+
+    def form_valid(self, form):
         return super().form_valid(form)
 
 
@@ -51,6 +59,17 @@ class QuestionUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.Update
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+    def test_func(self):
+        question = self.get_object()
+        if self.request.user == question.author:
+            return True
+        return False
+
+
+class QuestionDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+    model = Question
+    success_url = '/'
 
     def test_func(self):
         question = self.get_object()

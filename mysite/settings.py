@@ -26,7 +26,7 @@ SECRET_KEY = 'cyplz%$fwtlnpk0=zk_*%8z0@(cybhlefg4jb@872yv17r+i9#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition

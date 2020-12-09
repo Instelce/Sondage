@@ -7,13 +7,11 @@
         <form class="form__register" method="POST">
             {% csrf_token %}
             <fieldset class="form__group">
-                <legend class="main__title">Ajout d'une question</legend>
+                <legend class="main__title">Ajout de choix pour ...</legend>
                 {{ form|crispy }}
-                <p>Exemple de date : 20-11-2020.</p><p class="text__gray">Je sais que c'est chiant ;)</p>
             </fieldset>
             <div class="mt-2">
                 <button class="btn button__gray" type="submit">Soumettre</button>
-                <a href="{% url 'polls:create-choice' %}" class="btn button__gray">Ajout de choix</a>
             </div>
         </form>
     </div>
