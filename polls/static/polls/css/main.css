@@ -39,8 +39,7 @@ body {
     color: rgb(21,87,36);
 }
 
-.btn,
-.clearablefileinput{
+.btn {
     padding: 10px 20px;
 
     text-transform: uppercase;
@@ -51,18 +50,12 @@ body {
     font-weight: 100;
     text-align: center;
     opacity: 1;
-    cursor: pointer;
 
     display: inline-flex;
     justify-content: center;
     align-items: center;
 
     transition: opacity 0.2s, background 0.3s;
-}
-
-.clearablefileinput {
-    width: auto;
-    margin-top: 5px;
 }
 
 .button__img {
@@ -77,12 +70,10 @@ body {
     background: rgba(138, 138, 138, 0.8);
 }
 
-.button__red,
-.clearablefileinput{
+.button__red {
     background: hsla(0, 100%, 68%, 0.6);
 }
-.button__red:hover,
-.clearablefileinput:hover {
+.button__red:hover {
     background: hsla(0, 100%, 68%, 0.8);
 }
 
@@ -583,7 +574,7 @@ body {
     margin-bottom: 5px;
 }
 
-.form__error {
+.form__error, .invalid-feedback {
     margin-bottom: 20px;
 
     color: var(--color-primary-red);
@@ -604,10 +595,8 @@ body {
 
 /* ----- Register Form Style ----- */
 
-.form__register input[type="text"],
-.form__register input[type="email"],
-.form__register input[type="password"] {
-    width: 200px;
+.form__register input {
+    width: 30%;
     padding: 10px 20px;
     margin-bottom: 10px;
 
@@ -616,20 +605,14 @@ body {
     border-radius: 2px;
     color: hsla(0, 100%, 68%, 0.6);
 
-    display: block;
-
     transition: border 0.3s, background 0.2s;
 }
 
-.form__register input[type="text"]:hover,
-.form__register input[type="email"]:hover,
-.form__register input[type="password"]:hover {
+.form__register input:hover {
     border: 2px solid var(--color-primary-red);
 }
 
-.form__register input[type="text"]:focus,
-.form__register input[type="email"]:focus,
-.form__register input[type="password"]:focus {
+.form__register input:focus {
     background: var(--color-primary-red);
     color: #fff;
 }
@@ -755,19 +738,14 @@ body {
 
 @media only screen and (max-width: 1050px) {
     .inputGroup {
-        width: 80%;
+        width: 100%;
     }
 }
 
 
 /* ----- Profile Style ----- */
 
-.profile__container {
-    width: 100%;
-}
-
 .profile__top {
-    width: 100%;
     padding-bottom: 20px;
 
     display: flex;
@@ -791,4 +769,36 @@ body {
 
 .profile__body {
     width: 100%;
+}
+
+
+/* ----- Results Style ----- */
+
+.results__item {
+    width: 60%;
+    padding: 12px 30px;
+    margin-bottom: 10px;
+
+    background: var(--color-primary-red);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.results__text {
+    font-size: 18px;
+    font-weight: 200;
+    color: #fff;
+}
+
+.votes__text {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+}
+
+@media only screen and (max-width: 1050px) {
+    .results__item {
+        width: 100%;
+    }
 }

@@ -45,6 +45,9 @@
             <div class="user__container-button">
                 <a class="btn button__gray" href="{% url 'profile' %}"><img class="button__img" src="{% static 'polls/images/eyes-icon.svg' %}">Profile</a>
                 <a class="btn button__red" href="{% url 'polls:create' %}"><img class="button__img" src="{% static 'polls/images/plus-icon.svg' %}">Nouvelle Question</a>
+                {% if request.user.is_staff %}
+                    <a class="btn button__red" href="/admin">Administration</a>
+                {% endif %}
             </div>
         {% endif %}
     </div>
