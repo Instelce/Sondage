@@ -5,6 +5,7 @@ from django.views import generic
 from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import User
 
 from .models import Choice, Question
 
@@ -13,6 +14,36 @@ class IndexView(generic.ListView):
     model = Question
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
+    paginate_by = 8
+
+    def get_queryset(self):
+        """
+            Return the last five published questions (not including those set to be
+            published in the future).
+        """
+        return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
+
+
+class UserIndexView(generic.ListView):
+    model = Question
+    template_name = 'polls/user_questions.html'
+    context_object_name = 'latest_question_list'
+    paginate_by = 10
+
+    def get_queryset(self):
+        """
+            Return the last five published questions (not including those set to be
+            published in the future).
+        """
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Question.objects.filter(author=user).order_by('-pub_date')
+
+
+class TodayIndexView(generic.ListView):
+    model = Question
+    template_name = 'polls/user_questions.html'
+    context_object_name = 'latest_question_list'
+    paginate_by = 10
 
     def get_queryset(self):
         """
@@ -36,10 +67,11 @@ class DetailView(generic.DetailView):
 
 class QuestionCreateView(LoginRequiredMixin, generic.CreateView):
     model = Question
-    fields = ['question_text', 'pub_date']
+    fields = ['question_text']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        form.instance.pub_date = timezone.now()
         return super().form_valid(form)
 
 

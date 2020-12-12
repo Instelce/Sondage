@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="sondage__container">
+    <small class="text__gray">Question de <a href="{% url 'polls:user' question.author.username %}">{{ question.author }}</a></small>
     <h3 class="main__title">{{ question.question_text }}</h3>
 
     {% if error_message %}<p class="form__error"><strong>{{ error_message }}</strong></p>{% endif %}

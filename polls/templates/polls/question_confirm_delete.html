@@ -8,7 +8,7 @@
             {% csrf_token %}
             <fieldset class="form__group">
                 <legend class="main__title">Suppression d'une question</legend>
-                <p>Est tu sur de supprimer la question : "{{ object.question_text }}" ?</p>
+                <p>Est-tu sûr de vouloir supprimer la question : "{{ object.question_text }}" ?</p>
             </fieldset>
             <div class="mt-2">
                 <button class="btn button__red" type="submit">Supprimer</button>

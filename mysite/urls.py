@@ -24,8 +24,21 @@ urlpatterns = [
     path('admin/', admin.site.urls, name="admin"),
     path('register/', user_views.register, name="register"),
     path('profile/', user_views.profile, name="profile"),
-    path('login/', auth_views.LoginView.as_view(template_name='users/login.html', extra_context={'title': 'Login'}), name="login"),
-    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html', extra_context={'title': 'Login'}), name="logout"),
+    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'
+                                                , extra_context={'title': 'Login'})
+         , name="login"),
+    path('logout/', auth_views.LogoutView.as_view(
+        template_name='users/logout.html', extra_context={'title': 'Login'})
+         , name="logout"),
+    path('password-reset/', auth_views.PasswordResetView.as_view(
+        template_name='users/password_reset.html', extra_context={'title': 'Mot de passe'})
+         , name="password_reset"),
+    path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(
+        template_name='users/password_reset_done.html', extra_context={'title': 'Mot de passe'})
+         , name="password_reset_done"),
+    path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
+        template_name='users/password_reset_confirm.html', extra_context={'title': 'Mot de passe'})
+         , name="password_reset_confirm"),
     path('', include('polls.urls')),
 ]
 

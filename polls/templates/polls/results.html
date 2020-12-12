@@ -3,6 +3,7 @@
 
 {% block content %}
 <div class="sondage__container">
+    <small class="text__gray">Nombre de vote</small>
     <h3 class="main__title">{{ question.question_text }}</h3>
 
     <div class="results__container">
@@ -12,6 +13,6 @@
             </div>
         {% endfor %}
     </div>
-    <a class="btn button__gray mt-2" href="{% url 'polls:home' %}">Retour au question</a>
+    <a class="btn button__gray mt-2" href="{% url 'polls:home' %}">Retour aux questions</a>
 </div>
 {% endblock content %}

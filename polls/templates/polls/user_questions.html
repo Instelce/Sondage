@@ -3,10 +3,10 @@
 
 {% block content %}
     <div class="sondage__container">
-        <h3 class="main__title">Questions</h3>
+        <h3 class="main__title">Questions de {{ view.kwargs.username }} <sup class="text__gray">{{ page_obj.paginator.count }}</sup></h3>
         {% if latest_question_list %}
             {% for question in latest_question_list %}
-                <div class="sondage__link">
+                <div href="#" class="sondage__link">
                     <div class="sondage__left">
                         <img class="sondage__user" src="{{ question.author.profile.image.url }}">
                         <div>
@@ -30,25 +30,6 @@
             {% endfor %}
         {% else %}
             <p>Aucune question n'a été créé.</p>
-        {% endif %}
-    </div>
-
-    <div class="sidebar">
-        <!--<div class="filter__container">
-            <h3 class="main__title">Filtre</h3>
-            <a href="#" class="filter__button"><img src="{% static 'polls/images/encoche-icon.svg' %}"> Aujourd'hui</a>
-            <a href="#" class="filter__button"><img src="{% static 'polls/images/encoche-icon.svg' %}"> Cette semaine</a>
-            <a href="#" class="filter__button"><img src="{% static 'polls/images/encoche-icon.svg' %}"> Ce mois</a>
-            <a href="#" class="filter__button"><img src="{% static 'polls/images/encoche-icon.svg' %}"> Toutes les questions</a>
-        </div>-->
-        {% if user.is_authenticated %}
-            <div class="user__container-button">
-                <a class="btn button__gray" href="{% url 'profile' %}"><img class="button__img" src="{% static 'polls/images/eyes-icon.svg' %}">Profile</a>
-                <a class="btn button__red" href="{% url 'polls:create' %}"><img class="button__img" src="{% static 'polls/images/plus-icon.svg' %}">Nouvelle Question</a>
-                {% if request.user.is_staff %}
-                    <a class="btn button__red" href="/admin">Administration</a>
-                {% endif %}
-            </div>
         {% endif %}
     </div>
 {% endblock content %}

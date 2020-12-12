@@ -14,6 +14,10 @@ body {
     font-family: 'Barlow', sans-serif;
 }
 
+sup {
+    font-size: 14px;
+}
+
 .container {
     padding: 0px 20%;
 }
@@ -365,6 +369,7 @@ body {
 }
 
 .sondage__title {
+    max-width: 280px;
     margin-left: 30px;
     margin-bottom: 5px;
 
@@ -421,6 +426,7 @@ body {
     }
 
     .sondage__title {
+        max-width: none;
         margin-bottom: 5px;
 
         font-size: 20px;
@@ -537,12 +543,53 @@ body {
 }
 
 
+/* ----- Paginator Style ----- */
+
+.paginator__container div {
+    width: 100%;
+    padding-top: 20px;
+
+    border-top: 1px solid var(--color-secondary-grayish-blue);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paginator__btn {
+    margin: 0px 5px;
+    padding: 5px 12px;
+
+    border: 1px solid hsla(230, 29%, 20%, 0.8);
+    border-radius: 2px;
+    color: var(--color-primary-blue);
+
+    transition: border 0.2s, background 0.4s;
+}
+
+.paginator__btn:hover {
+    border: 1px solid hsl(230, 29%, 20%);
+    background: hsla(230, 29%, 20%, 0.2);
+}
+
+.pagin-active {
+    background: var(--color-primary-blue);
+    color: #fff;
+    font-weight: 600;
+}
+
+.pagin-active:hover {
+    background: transparent;
+    color: var(--color-primary-blue);
+    font-weight: 800;
+}
+
 /* ----- Footer Style ----- */
 
 .footer {
     width: 100%;
     height: auto;
-    margin-top: 40px;
+    margin-top: 20px;
     padding-bottom: 40px;
     bottom: 0;
 
@@ -604,6 +651,8 @@ body {
     border: 2px solid hsla(0, 100%, 68%, 0.6);
     border-radius: 2px;
     color: hsla(0, 100%, 68%, 0.6);
+
+    display: block;
 
     transition: border 0.3s, background 0.2s;
 }
@@ -779,7 +828,7 @@ body {
     padding: 12px 30px;
     margin-bottom: 10px;
 
-    background: var(--color-primary-red);
+    background-color: rgb(221, 221, 221);
 
     display: flex;
     align-items: center;
@@ -788,12 +837,12 @@ body {
 
 .results__text {
     font-size: 18px;
-    font-weight: 200;
-    color: #fff;
+    font-weight: 300;
+    color: var(--color-primary-blue);
 }
 
 .votes__text {
-    color: rgba(255, 255, 255, 0.8);
+    color: hsla(230, 29%, 20%, 0.8);
     font-weight: 600;
 }
 
